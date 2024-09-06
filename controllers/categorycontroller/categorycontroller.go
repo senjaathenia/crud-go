@@ -1,7 +1,7 @@
 package categorycontroller
 
 import (
-	"go-native/config"
+
 	"go-native/entities"
 	"go-native/models/categorymodel"
 	"html/template"
@@ -63,19 +63,11 @@ func Edit(w http.ResponseWriter, r *http.Request) {
 		data := map[string]any{
 			"category": category,
 		}
+
 		temp.Execute(w, data)
 	}
 }
 
-func Detail(id int) entities.Category {
-	config.DB.QueryRow(`SELECT id, name FROM categories WHERE id = ?`, id)
-
-	var category entities.Category
-	if err := row.Scan(&category.Id, &category.Name); err != nil{
-		panic(err)
-	}
-	return category
-}
 func Delete(w http.ResponseWriter, r *http.Request) {
 
 }
